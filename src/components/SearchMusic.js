@@ -1,10 +1,13 @@
+// components/SearchMusic.js
 import React, { useState } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import SongItem from '../components/SongItem';
 import styles from '../styles/SearchMusicStyle';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const SearchMusic = () => {
+
+const SearchMusic = ({ navigation }) => { 
   const [searchQueryArtist, setSearchQueryArtist] = useState('');
   const [searchQueryMusic, setSearchQueryMusic] = useState('');
   const [resultsArtist, setResultsArtist] = useState([]);
@@ -38,7 +41,7 @@ const SearchMusic = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <SearchBar
         placeholder="Rechercher un artiste"
         value={searchQueryArtist}
@@ -53,15 +56,28 @@ const SearchMusic = () => {
         onPress={searchResultsMusic}
         buttonText="Rechercher une musique"
       />
+
+
+      <TouchableOpacity
+        style={styles.favoritesButton}
+        onPress={() => navigation.navigate('FavoritesScreen')} 
+      >
+        <Text style={styles.favoritesButtonText}>Voir les favoris</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Icon name="star" size={20} color="#fff" style={{ marginRight: 8 }} />
+          <Text style={styles.favoritesButtonText}>Voir les favoris</Text>
+        </View>
+      </TouchableOpacity>
+
       <FlatList
         data={searchType === 'artist' ? resultsArtist : resultsMusic}
         keyExtractor={(item) => item.trackId.toString()}
-        renderItem={({ item }) => (
-          <SongItem trackName={item.trackName} artistName={item.artistName} />
-        )}
+        renderItem={({ item }) => <SongItem song={item} />}
       />
     </View>
   );
 };
+
+
 
 export default SearchMusic;

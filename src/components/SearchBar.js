@@ -22,6 +22,7 @@ const SearchBar = ({ placeholder, value, onChangeText, onPress, buttonText }) =>
 const styles = StyleSheet.create({
   container: {
     marginBottom: 16,
+    alignItems: 'center'
   },
   input: {
     height: 40,
@@ -29,12 +30,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     marginBottom: 8,
+    marginTop:8, 
+    maxWidth: '100%',
   },
   button: {
     backgroundColor: '#007bff',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
+    width : '80%'
   },
   buttonText: {
     color: '#fff',
