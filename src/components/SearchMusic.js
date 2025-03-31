@@ -20,6 +20,9 @@ const SearchMusic = ({ navigation }) => {
         `https://itunes.apple.com/search?term=${encodeURIComponent(searchQueryArtist)}&media=music`
       );
       const data = await response.json();
+      // console.log("Data:" + data)
+      // if (data == []) {
+      // }
       setResultsArtist(data.results);
       setSearchType('artist');
     } catch (error) {
@@ -62,9 +65,8 @@ const SearchMusic = ({ navigation }) => {
         style={styles.favoritesButton}
         onPress={() => navigation.navigate('FavoritesScreen')} 
       >
-        <Text style={styles.favoritesButtonText}>Voir les favoris</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Icon name="star" size={20} color="#fff" style={{ marginRight: 8 }} />
+          <Icon name="heart" size={20} color="#fff" style={{ marginRight: 8 }} />
           <Text style={styles.favoritesButtonText}>Voir les favoris</Text>
         </View>
       </TouchableOpacity>
